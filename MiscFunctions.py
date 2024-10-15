@@ -2,7 +2,7 @@
 
 def make_same_size(list1, list2, pad_with=0):
     """while maintaining the length of list1, ensure that list2 is the same size as list1. if list2
-    is shorter it pads the list with padder, if longer then it's truncated
+    is shorter it pads the list with pad_with, if longer then it's truncated
 
     Args:
         list1 (list): list of length n

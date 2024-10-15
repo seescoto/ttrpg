@@ -1,4 +1,4 @@
-import Ability_Scores
+from Ability_Scores import Ability_Scores
 
 
 class Game:

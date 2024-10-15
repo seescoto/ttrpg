@@ -4,6 +4,7 @@ import MiscFunctions as MF
 class Ability_Scores:
 
     ability_scores: list[str]
+    ability_modifiers: dict[int, int]
 
     def __init__(self, ability_scores: list[str]) -> None:
         """set which attributes/stats/ability score categories that a character in a given game will
@@ -32,3 +33,6 @@ class Ability_Scores:
             char_ability_scores[self.ability_scores[i]] = score_list[i]
 
         return char_ability_scores
+
+    def set_ability_modifiers(self, ability_modifiers: dict[int, int]) -> None:
+        self.ability_modifiers = ability_modifiers

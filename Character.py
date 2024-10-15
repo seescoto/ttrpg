@@ -1,4 +1,4 @@
-import Game
+from Game import Game
 import random
 
 
@@ -39,11 +39,22 @@ class Character:
     def roll(self, dice_sides: int = 20) -> int:
         return random.randint(1, dice_sides)
 
-    def roll_saving_throw(self, saving_throw: int, dice_sides: int = 20):
+    def roll_saving_throw(self, saving_throw: int, throw_type: str = None, dice_sides: int = 20):
         roll = self.roll(dice_sides)
+        bonus = 0
+        # add bonuses based on modifiers
+        if (throw_type in self.game.stat_system.ability_scores) and (self.game.ability_modifiers is not None):
+            score = self.ability_scores[throw_type]
+            bonus = self.game.stat_system.ability_modifiers.get(score, 0)
+
         outcome = ["Yes!", "succeeded"]
-        if (roll <= saving_throw):
+        if (roll + bonus <= saving_throw):
             outcome = ["Oh no!", "failed"]
 
         print(
-            f'{outcome[0]} {self.name} {outcome[1]} their saving throw and rolled a {roll}.')
+            f'{outcome[0]} {self.name} {outcome[1]} their saving throw with a roll of a {roll}')
+        if (bonus != 0):
+            print(
+                f'and a bonus ability modifier of {bonus} for a total value of {roll+bonus}')
+
+        print(f'.\n')
